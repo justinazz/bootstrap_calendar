@@ -60,6 +60,12 @@ released open source under the Apache License
             else
                 monday_start_of_week = false;
 
+            var event_custom_css_class;
+            if (typeof args.event_custom_css_class != "undefined")
+                event_custom_css_class = args.event_custom_css_class;
+            else
+                event_custom_css_class = "event";
+
             var left_icon_custom_css_class;
             if (typeof args.left_icon_custom_css_class != "undefined")
                 left_icon_custom_css_class = args.left_icon_custom_css_class;
@@ -320,13 +326,20 @@ released open source under the Apache License
 
             function check_events(month, year) {
                 if (req_ajax != false) {
+                    var data = {}
+
+                    if (typeof req_ajax.data != "undefined") {
+                        data = req_ajax.data;
+                    }
+                    data["year"] = year;
+                    data["month"] = month + 1;
+
                     $.ajax({
                         type: req_ajax.type,
                         url: req_ajax.url,
-                        data: { month: month + 1, year: year },
+                        data: data,
                         dataType: 'json'
                     }).done(function (data) {
-
                         events = [];
 
                         $.each(data, function (k, v) {
@@ -334,7 +347,6 @@ released open source under the Apache License
                         });
 
                         markEvents(month, year);
-
                     });
                 } else {
                     markEvents(month, year);
@@ -349,7 +361,7 @@ released open source under the Apache License
 
                         if (events[i][0].split('/')[1] == t_month && events[i][0].split('/')[2] == year) {
 
-                            $('#' + calendar_id + '_' + events[i][0].replace(/\//g, "_")).addClass('event');
+                            $('#' + calendar_id + '_' + events[i][0].replace(/\//g, "_")).addClass(event_custom_css_class);
 
                             $('#' + calendar_id + '_' + events[i][0].replace(/\//g, "_") + ' a').attr('data-original-title', events[i][1]);
 
