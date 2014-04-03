@@ -23,6 +23,8 @@ _Works inline, in dropdowns, and in the responsive navbar!_
 - events (array of event array)
 	- req_ajax.type (string) {'get', 'post'}
 	- req_ajax.url (string)
+	- req_ajax.data (object)
+		- allows user to add additional data to the asynchronous request in addition to the hard coded 'year' and 'month' parameters
 - Event (array)
 	- 0 (string): date
 	ex: "17/4/2013"
@@ -34,6 +36,18 @@ _Works inline, in dropdowns, and in the responsive navbar!_
 	ex: "#333"
 	- 4 (string): html popover
 	ex: "Text for the content of popover...description of event...image..."
+- monday_start_of_week (boolean)
+	- default: false
+	- sets if Monday is to be start of week, otherwise Sunday
+- event_custom_css_class (string)
+	- default: "event"
+	- allows the user to override the css class that is assigned by default to each event
+- left_icon_custom_css_class (string)
+	- default: "icon-arrow-left"
+	- allows overriding of icon of left icon css class
+- right_icon_custom_css_class (string)
+	- default: "icon-arrow-right"
+	- allows overriding of icon of right icon css class
 
 ##Use example
 
